@@ -11,7 +11,7 @@ const fs = require('fs');
 
 app.use(express.urlencoded({
     extended: true,
-    limit: "500mb"
+    limit: "50000mb"
   }))
 
 // enable files upload
