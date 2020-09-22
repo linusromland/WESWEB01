@@ -5,6 +5,7 @@ const filesDir = __dirname + "/client/"
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const dbfile = require('./mongo.js');
+const passwordHash = require('password-hash');
 
 
 //add other middleware
@@ -15,13 +16,15 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', (req, res) => {
-    res.sendFile(filesDir + 'index.html')
+    res.sendFile(filesDir + 'login.html')
+})
+app.get('/register', (req, res) => {
+    res.sendFile(filesDir + 'register.html')
 })
 app.listen(port, () => console.log(`Server running okay!`))
 
-app.post('/', function (req, res) {
-    console.log("\nNew POST request! \n\nName: " + req.body.name + "\nEmail: " + req.body.email + "\Age: " + req.body.age + "\n\n")
-    dbfile.data(req.body.name, req.body.email, req.body.age)
+app.post('/register', function (req, res) {
+    dbfile.data(req.body.name, req.body.email, passwordHash.generate(req.body.pass))
     res.send("Created person " + req.body.name)
     res.end()
 })
