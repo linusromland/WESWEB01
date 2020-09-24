@@ -1,14 +1,33 @@
 <html>
+<head>
+  <title>Register</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+</head>
 <body>
+  <script>
+    function httpPost() {
+      let request = new XMLHttpRequest();
+      let name = document.getElementById("name").value;
+      let mail = document.getElementById("mail").value;
+      let pass = CryptoJS.MD5((document.getElementById("pass").value) + name);
 
-<form method="POST" action="/">
-    <input type="text" name="name" placeholder="name"/>
-    <input type="password" name="pass" placeholder="pass"/>
-    <input type="text" name="email" placeholder="email"/>
-    <input type="submit" />
+      request.open("POST", "/register", true);
+      request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      console.log(`name=${name}&mail=${mail}&pass=${pass}`)
+      request.send(`name=${name}&mail=${mail}&pass=${pass}`)
+    }
+  </script>
+
+  <form>
+    <input id="name" type="text" name="name" placeholder="name" />
+    <input id="pass" type="password" name="pass" placeholder="pass" />
+    <input id="mail" type="text" name="email" placeholder="email" />
+    <input type="button" onclick="httpPost()" />
   </form>
 
   <a href="/">Want to login?</a>
 
 </body>
+
 </html>

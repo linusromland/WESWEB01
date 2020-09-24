@@ -5,7 +5,6 @@ const filesDir = __dirname + "/client/"
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const dbfile = require('./mongo.js');
-const passwordHash = require('password-hash');
 
 
 //add other middleware
@@ -24,7 +23,8 @@ app.get('/register', (req, res) => {
 app.listen(port, () => console.log(`Server running okay!`))
 
 app.post('/register', function (req, res) {
-    dbfile.data(req.body.name, req.body.email, passwordHash.generate(req.body.pass))
+    console.log("NEW POST!!\n" + req.body.name, req.body.mail, req.body.pass)
+    dbfile.data(req.body.name, req.body.mail, req.body.pass)
     res.send("Created person " + req.body.name)
     res.end()
 })

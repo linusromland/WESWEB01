@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => console.log(`Server running okay!`))
 
 app.post('/', function (req, res) {
-    console.log("\nNew POST request! \n\nName: " + req.body.name + "\nEmail: " + req.body.email + "\Age: " + req.body.age + "\n\n")
+    console.log("\nNew POST request! \n\nName: " + req.body.name + "\nEmail: " + req.body.email + "\nAge: " + req.body.age + "\n\n")
     dbfile.data(req.body.name, req.body.email, req.body.age)
     res.send("Created person " + req.body.name)
     res.end()

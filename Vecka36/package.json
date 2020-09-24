@@ -4,18 +4,12 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-<<<<<<< HEAD
     "express": "^4.17.1",
-=======
->>>>>>> 191f5558f4418a4149551fc3386dd32c59af5425
     "nodemon": "^2.0.4"
   },
   "devDependencies": {},
   "scripts": {
-<<<<<<< HEAD
     "devStart": "nodemon app.js"
-=======
->>>>>>> 191f5558f4418a4149551fc3386dd32c59af5425
   },
   "author": "",
   "license": "ISC"
