@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool MessageBoardThingy</title>
+</head>
+<body>
+
+    <form method="POST" action="/">
+        <input type="text" name="name" placeholder="name"/>
+        <input type="text" name="msg" placeholder="msg"/>
+        <input type="submit" />
+    </form>
+    <% for( let index = 0; index < data.length; index++ ) { %>
+    <div style="background-color: aqua; width: 20%;">
+            <p><%- data[index].name %> </p>
+            <p><%- data[index].msg %> </p>
+    </div>
+    <% } %>
+</body>
+</html>
