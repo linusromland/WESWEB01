@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const dBModule = require('./dBModule')
 const app = express()
-const port = 3000
+const port = 3001
 
 const clientDir = __dirname + "/client/"
 
