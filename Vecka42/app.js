@@ -32,6 +32,10 @@ app.get('/', async (req, res) => {
     });
 })
 
+setInterval(dBModule.dropDatabase, 30000, message)
+
+
+
 app.post('/', (req, res) => {
   if(!req.body.msg.includes('<script') || !req.body.name.includes('<script'))dBModule.saveToDB(createMessage(req.body.name, req.body.msg))
    res.redirect('/')

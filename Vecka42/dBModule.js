@@ -12,6 +12,12 @@ exports.cnctDB = (collectionname) =>{
 
 }
 
+exports.dropDatabase = (Model) => {
+  Model.remove({}, function(err) { 
+    console.log('Removed database') 
+ });
+}
+
 exports.findInDB = async (Model) => {
   return await Model.find({})
 }
