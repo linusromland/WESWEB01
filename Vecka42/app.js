@@ -30,11 +30,10 @@ app.get('/', async (req, res) => {
     res.render('msg', {
         data: await dBModule.findInDB(message)
     });
-    console.log(await dBModule.findInDB(message))
 })
 
 app.post('/', (req, res) => {
-  if(!req.body.msg.includes('<') || !req.body.name.includes('<'))dBModule.saveToDB(createMessage(req.body.name, req.body.msg))
+  if(!req.body.msg.includes('<script') || !req.body.name.includes('<script'))dBModule.saveToDB(createMessage(req.body.name, req.body.msg))
    res.redirect('/')
  })
 
