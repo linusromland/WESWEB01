@@ -34,7 +34,7 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  if(!req.body.msg.includes("<") || !req.body.name.includes("<"))dBModule.saveToDB(createMessage(req.body.name, req.body.msg))
+  if(!req.body.msg.includes('<') || !req.body.name.includes('<'))dBModule.saveToDB(createMessage(req.body.name, req.body.msg))
    res.redirect('/')
  })
 
