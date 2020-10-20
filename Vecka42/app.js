@@ -32,7 +32,7 @@ app.get('/', async (req, res) => {
     });
 })
 
-//setInterval(dBModule.dropDatabase, 30000, message)
+setInterval(dBModule.dropDatabase, 30000000, message)
 
 
 
