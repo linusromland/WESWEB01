@@ -24,10 +24,16 @@ let tmp = new User({
 
 app.post('/users', async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    const user = { name: req.body.name, password: hashedPassword }
-    dBModule.saveToDB(createUser(req.body.name, hashedPassword))
-    res.status(201).send()
+    const userExist = await dBModule.findInDBOne(User, req.body.name)
+    if (userExist == null) {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10)
+      dBModule.saveToDB(createUser(req.body.name, hashedPassword))
+      res.status(201).send()
+    }else{
+      return res.status(400).send('sry usrname taken')
+    }
+
+    
   } catch {
     res.status(500).send()
   }
@@ -35,7 +41,6 @@ app.post('/users', async (req, res) => {
 
 app.post('/users/login', async (req, res) => {
   const user = await dBModule.findInDBOne(User, req.body.name)
-  console.log(user)
   if (user == null) {
     return res.status(400).send('sry no usr')
   }
