@@ -1,20 +1,32 @@
 const express = require('express')
 const app = express()
 const bcrypt = require('bcryptjs')
+const mongoose = require('mongoose')
+const dBModule = require('./dBModule')
 
 app.use(express.json())
 
-let users = []
+const userSchema = new mongoose.Schema({
+  name: String,
+  password: String
+});
 
-app.get('/users', (req, res) => {
-  res.json(users)
-})
+const User = mongoose.model('User', userSchema);
+dBModule.cnctDB("loginTest");
+  
+function createUser(nameIN, passIN){
+let tmp = new User({
+  name: nameIN, 
+  password: passIN, 
+ })
+ return tmp
+}
 
 app.post('/users', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     const user = { name: req.body.name, password: hashedPassword }
-    users.push(user)
+    dBModule.saveToDB(createUser(req.body.name, hashedPassword))
     res.status(201).send()
   } catch {
     res.status(500).send()
@@ -22,7 +34,8 @@ app.post('/users', async (req, res) => {
 })
 
 app.post('/users/login', async (req, res) => {
-  const user = users.find(user => user.name === req.body.name)
+  const user = await dBModule.findInDBOne(User, req.body.name)
+  console.log(user)
   if (user == null) {
     return res.status(400).send('sry no usr')
   }
