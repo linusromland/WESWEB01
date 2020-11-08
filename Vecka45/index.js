@@ -22,6 +22,10 @@ let tmp = new User({
  return tmp
 }
 
+app.get('/'), (req, res) => {
+  res.send()
+}
+
 app.post('/users', async (req, res) => {
   try {
     const userExist = await dBModule.findInDBOne(User, req.body.name)
